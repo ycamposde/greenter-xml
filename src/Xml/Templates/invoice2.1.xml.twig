@@ -3,8 +3,12 @@
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ccts="urn:un:unece:uncefact:documentation:2"
          xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2"
+         xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionContent/>
@@ -19,11 +23,16 @@
     {% if doc.fecVencimiento %}
     <cbc:DueDate>{{ doc.fecVencimiento|date('Y-m-d') }}</cbc:DueDate>
     {% endif %}
-    <cbc:InvoiceTypeCode listID="{{ doc.tipoOperacion }}">{{ doc.tipoDoc }}</cbc:InvoiceTypeCode>
+    <cbc:InvoiceTypeCode listAgencyName="PE:SUNAT" listID="{{ doc.tipoOperacion }}" listName="Tipo de Documento" listSchemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01" name="Tipo de Operacion">{{ doc.tipoDoc }}</cbc:InvoiceTypeCode>
     {% for leg in doc.legends %}
     <cbc:Note languageLocaleID="{{ leg.code }}"><![CDATA[{{ leg.value }}]]></cbc:Note>
     {% endfor %}
-    <cbc:DocumentCurrencyCode>{{ doc.tipoMoneda }}</cbc:DocumentCurrencyCode>
+    <cbc:DocumentCurrencyCode listAgencyName="United Nations Economic Commission for Europe" listID="ISO 4217 Alpha" listName="Currency">{{ doc.tipoMoneda }}</cbc:DocumentCurrencyCode>
+
+    {% if doc.descripcion %}
+    <cbc:BuyerReference><![CDATA[{{ doc.descripcion }}]]></cbc:BuyerReference>
+    {% endfor %}
+
     {% if doc.compra %}
     <cac:OrderReference>
         <cbc:ID>{{ doc.compra }}</cbc:ID>
@@ -61,7 +70,7 @@
     {% endif %}
     <cac:Signature>
         <cbc:ID>{{ emp.ruc }}</cbc:ID>
-        <cbc:Note>GREENTER</cbc:Note>
+        <cbc:Note>Elaborado por el sistema de facturacion electronica DARWIN</cbc:Note>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
                 <cbc:ID>{{ emp.ruc }}</cbc:ID>
@@ -72,14 +81,14 @@
         </cac:SignatoryParty>
         <cac:DigitalSignatureAttachment>
             <cac:ExternalReference>
-                <cbc:URI>#SIGN-GREEN</cbc:URI>
+                <cbc:URI>#SignatureSP</cbc:URI>
             </cac:ExternalReference>
         </cac:DigitalSignatureAttachment>
     </cac:Signature>
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="6">{{ emp.ruc }}</cbc:ID>
+                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="6" schemeName="Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">{{ emp.ruc }}</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name><![CDATA[{{ emp.nombreComercial|raw }}]]></cbc:Name>
@@ -91,11 +100,11 @@
                     <cbc:ID>{{ addr.ubigueo }}</cbc:ID>
                     <cbc:AddressTypeCode>{{ addr.codLocal }}</cbc:AddressTypeCode>
                     {% if addr.urbanizacion %}
-                    <cbc:CitySubdivisionName>{{ addr.urbanizacion }}</cbc:CitySubdivisionName>
+                    <cbc:CitySubdivisionName><![CDATA[{{ addr.urbanizacion }}]]></cbc:CitySubdivisionName>
                     {% endif %}
-                    <cbc:CityName>{{ addr.provincia }}</cbc:CityName>
-                    <cbc:CountrySubentity>{{ addr.departamento }}</cbc:CountrySubentity>
-                    <cbc:District>{{ addr.distrito }}</cbc:District>
+                    <cbc:CityName><![CDATA[{{ addr.provincia }}]]></cbc:CityName>
+                    <cbc:CountrySubentity><![CDATA[{{ addr.departamento }}]]></cbc:CountrySubentity>
+                    <cbc:District><![CDATA[{{ addr.distrito }}]]></cbc:District>
                     <cac:AddressLine>
                         <cbc:Line><![CDATA[{{ addr.direccion|raw }}]]></cbc:Line>
                     </cac:AddressLine>
@@ -244,8 +253,8 @@
         <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
         <cbc:AllowanceChargeReasonCode>{{ perc.codReg }}</cbc:AllowanceChargeReasonCode>
         <cbc:MultiplierFactorNumeric>{{ perc.porcentaje }}</cbc:MultiplierFactorNumeric>
-        <cbc:Amount currencyID="PEN">{{ perc.mto|n_format }}</cbc:Amount>
-        <cbc:BaseAmount currencyID="PEN">{{ perc.mtoBase|n_format }}</cbc:BaseAmount>
+        <cbc:Amount currencyID="{{ doc.tipoMoneda }}">{{ perc.mto|n_format }}</cbc:Amount>
+        <cbc:BaseAmount currencyID="{{ doc.tipoMoneda }}">{{ perc.mtoBase|n_format }}</cbc:BaseAmount>
     </cac:AllowanceCharge>
     {% endif %}
     <cac:TaxTotal>
