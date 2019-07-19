@@ -18,7 +18,7 @@
     "type": "library",
     "require": {
 		"php": ">=5.5.9",
-        "greenterose/core": "^2.1",
+        "greenterose/core": "dev-master",
         "twig/twig": "~1.0 || ~2.0"
     },
 	"require-dev": {
