@@ -339,7 +339,7 @@
         {% endif %}
         {% if doc.mtoIVAP %}
             <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoBaseIVAP|n_format }}</cbc:TaxableAmount>
+                <cbc:TaxableAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoBaseIvap|n_format }}</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoIVAP|n_format }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
