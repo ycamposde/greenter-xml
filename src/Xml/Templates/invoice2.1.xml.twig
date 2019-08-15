@@ -70,7 +70,7 @@
     {% endif %}
     <cac:Signature>
         <cbc:ID>{{ emp.ruc }}</cbc:ID>
-        <cbc:Note>Elaborado por el sistema de facturacion electronica DARWIN</cbc:Note>
+        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica DARWIN]]></cbc:Note>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
                 <cbc:ID>{{ emp.ruc }}</cbc:ID>
@@ -385,7 +385,7 @@
         <cac:PricingReference>
             {% if detail.mtoValorGratuito %}
             <cac:AlternativeConditionPrice>
-                <cbc:PriceAmount currencyID="{{ doc.tipoMoneda }}">{{  detail.mtoValorGratuito|n_format_limit(10) }}</cbc:PriceAmount>
+                <cbc:PriceAmount currencyID="{{ doc.tipoMoneda }}">{{  detail.0|n_format_limit(10) }}</cbc:PriceAmount>
                 <cbc:PriceTypeCode listAgencyName="PE:SUNAT" listName="Tipo de Precio" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">02</cbc:PriceTypeCode>
             </cac:AlternativeConditionPrice>
             {% else %}
