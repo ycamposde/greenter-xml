@@ -314,7 +314,7 @@
         {% if doc.mtoOperGratuitas %}
             <cac:TaxSubtotal>
                 <cbc:TaxableAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoOperGratuitas|n_format }}</cbc:TaxableAmount>
-                <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">0</cbc:TaxAmount>
+                <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoTributosGratuitas|n_format }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
                         <cbc:ID schemeName="Codigo de tributos" schemeID="UN/ECE 5153" schemeAgencyName="PE:SUNAT">9996</cbc:ID>
