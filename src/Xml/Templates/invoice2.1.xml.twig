@@ -206,7 +206,7 @@
             </cac:PayeeFinancialAccount>
         </cac:PaymentMeans>
         <cac:PaymentTerms>
-            <cbc:PaymentMeansID>{{ detr.codBienDetraccion }}</cbc:PaymentMeansID>
+            <cbc:PaymentMeansID schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo54" schemeName="Codigo de detraccion" schemeAgencyName="PE:SUNAT">{{ detr.codBienDetraccion }}</cbc:PaymentMeansID>
             <cbc:PaymentPercent>{{ detr.percent }}</cbc:PaymentPercent>
             <cbc:Amount currencyID="PEN">{{ detr.mount|n_format }}</cbc:Amount>
         </cac:PaymentTerms>
@@ -367,7 +367,7 @@
     <cac:LegalMonetaryTotal>
         <cbc:LineExtensionAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.valorVenta|n_format }}</cbc:LineExtensionAmount>
         {% if doc.precioVentaTotal %}
-        <cbc:TaxInclusiveAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.precioVentaTotal|n_format }}</cbc:TaxInclusiveAmount>
+            <cbc:TaxInclusiveAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.precioVentaTotal|n_format }}</cbc:TaxInclusiveAmount>
         {% endif %}
         {% if doc.mtoDescuentos %}
             <cbc:AllowanceTotalAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoDescuentos|n_format }}</cbc:AllowanceTotalAmount>
@@ -468,6 +468,9 @@
             </cac:TaxTotal>
             <cac:Item>
                 <cbc:Description><![CDATA[{{ detail.descripcion|raw }}]]></cbc:Description>
+                {% if detail.masDetalle %}
+                    <cbc:Description><![CDATA[{{ detail.masDetalle|raw }}]]></cbc:Description>
+                {% endif %}
                 {% if detail.codProducto %}
                     <cac:SellersItemIdentification>
                         <cbc:ID>{{ detail.codProducto }}</cbc:ID>
