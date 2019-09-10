@@ -253,8 +253,13 @@
             <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
             <cbc:AllowanceChargeReasonCode>{{ perc.codReg }}</cbc:AllowanceChargeReasonCode>
             <cbc:MultiplierFactorNumeric>{{ perc.porcentaje }}</cbc:MultiplierFactorNumeric>
-            <cbc:Amount currencyID="{{ doc.tipoMoneda }}">{{ perc.mto|n_format }}</cbc:Amount>
-            <cbc:BaseAmount currencyID="{{ doc.tipoMoneda }}">{{ perc.mtoBase|n_format }}</cbc:BaseAmount>
+            {% if perc.mtoMonedaNacional %}
+                <cbc:Amount currencyID="PEN">{{ perc.mtoMonedaNacional|n_format }}</cbc:Amount>
+                <cbc:BaseAmount currencyID="PEN">{{ perc.mtoBase|n_format }}</cbc:BaseAmount>
+            {% else %}
+                <cbc:Amount currencyID="{{ doc.tipoMoneda }}">{{ perc.mto|n_format }}</cbc:Amount>
+                <cbc:BaseAmount currencyID="{{ doc.tipoMoneda }}">{{ perc.mtoBase|n_format }}</cbc:BaseAmount>
+            {% endif %}
         </cac:AllowanceCharge>
     {% endif %}
     <cac:TaxTotal>
@@ -443,7 +448,7 @@
                     <cac:TaxCategory>
                         <cbc:Percent>{{ detail.porcentajeIgv }}</cbc:Percent>
                         <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="Afectacion del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">{{ detail.tipAfeIgv }}</cbc:TaxExemptionReasonCode>
-                        {% set afect = getTributoAfect(detail.tipAfeIgv) %}
+                        {% set afect = getTributoAfect(detail.tipAfeIgv, detail.mtoValorUnitario|n_format_limit(10)) %}
                         <cac:TaxScheme>
                             <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">{{ afect.id }}</cbc:ID>
                             <cbc:Name>{{ afect.name }}</cbc:Name>

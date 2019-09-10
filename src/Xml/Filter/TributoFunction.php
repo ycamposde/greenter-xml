@@ -39,10 +39,10 @@ class TributoFunction
     return null;
   }
 
-  public static function getByAfectacion($afectacion, $esTransferenciaGratuita)
+  public static function getByAfectacion($afectacion, $mtoValorUnitario)
   {
-    $var_afectacion = $esTransferenciaGratuita && $afectacion == '40' ? '': $afectacion;
-    $code = self::getCode($var_afectacion);
+    $afectacion = (int)$mtoValorUnitario == 0 && $afectacion == '40' ? '9996':$afectacion;
+    $code = self::getCode($afectacion);
 
     return self::getByTributo($code);
   }
