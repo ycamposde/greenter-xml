@@ -57,12 +57,12 @@
     {% if doc.anticipos %}
         {% for ant in doc.anticipos %}
             <cac:AdditionalDocumentReference>
-                <cbc:ID>{{ ant.nroDocRel }}</cbc:ID>
-                <cbc:DocumentTypeCode>{{ ant.tipoDocRel }}</cbc:DocumentTypeCode>
-                <cbc:DocumentStatusCode>{{ loop.index }}</cbc:DocumentStatusCode>
+                <cbc:ID schemeID="{{ doc.tipoDoc }}">{{ ant.nroDocRel }}</cbc:ID>
+                <cbc:DocumentTypeCode listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo12" listName="Documento Relacionado" listAgencyName="PE:SUNAT">{{ ant.tipoDocRel }}</cbc:DocumentTypeCode>
+                <cbc:DocumentStatusCode listName="Anticipo" listAgencyName="PE:SUNAT">{{ loop.index }}</cbc:DocumentStatusCode>
                 <cac:IssuerParty>
                     <cac:PartyIdentification>
-                        <cbc:ID schemeID="6">{{ emp.ruc }}</cbc:ID>
+                        <cbc:ID schemeID="{{ emp.tipoDoc }}">{{ emp.ruc }}</cbc:ID>
                     </cac:PartyIdentification>
                 </cac:IssuerParty>
             </cac:AdditionalDocumentReference>
@@ -88,7 +88,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="6" schemeName="Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">{{ emp.ruc }}</cbc:ID>
+                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="{{ emp.tipoDoc }}" schemeName="Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">{{ emp.ruc }}</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name><![CDATA[{{ emp.nombreComercial|raw }}]]></cbc:Name>
@@ -220,8 +220,9 @@
     {% if doc.anticipos %}
         {% for ant in doc.anticipos %}
             <cac:PrepaidPayment>
-                <cbc:ID>{{ loop.index }}</cbc:ID>
+                <cbc:ID  schemeName="Anticipo" schemeAgencyName="PE:SUNAT">{{ loop.index }}</cbc:ID>
                 <cbc:PaidAmount currencyID="{{ doc.tipoMoneda }}">{{ ant.total|n_format }}</cbc:PaidAmount>
+                <cbc:PaidDate>{{ doc.fechaAnticipo|date('Y-m-d') }}</cbc:PaidDate>
             </cac:PrepaidPayment>
         {% endfor %}
     {% endif %}

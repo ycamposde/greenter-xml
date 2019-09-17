@@ -18,7 +18,7 @@
     {% for leg in doc.legends %}
         <cbc:Note languageLocaleID="{{ leg.code }}"><![CDATA[{{ leg.value }}]]></cbc:Note>
     {% endfor %}
-    <cbc:DocumentCurrencyCode>{{ doc.tipoMoneda }}</cbc:DocumentCurrencyCode>
+    <cbc:DocumentCurrencyCode listAgencyName="United Nations Economic Commission for Europe" listID="ISO 4217 Alpha" listName="Currency">{{ doc.tipoMoneda }}</cbc:DocumentCurrencyCode>
     <cac:DiscrepancyResponse>
         <cbc:ReferenceID>{{ doc.numDocfectado }}</cbc:ReferenceID>
         <cbc:ResponseCode>{{ doc.codMotivo }}</cbc:ResponseCode>
@@ -72,7 +72,7 @@
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="6">{{ emp.ruc }}</cbc:ID>
+                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="{{ emp.tipoDoc }}" schemeName="Documento de Identidad" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">{{ emp.ruc }}</cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
                 <cbc:Name><![CDATA[{{ emp.nombreComercial|raw }}]]></cbc:Name>
@@ -152,7 +152,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoISC|n_format }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>2000</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">2000</cbc:ID>
                         <cbc:Name>ISC</cbc:Name>
                         <cbc:TaxTypeCode>EXC</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -165,7 +165,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoIGV|n_format }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>1000</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">1000</cbc:ID>
                         <cbc:Name>IGV</cbc:Name>
                         <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -178,7 +178,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">0</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>9998</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9998</cbc:ID>
                         <cbc:Name>INA</cbc:Name>
                         <cbc:TaxTypeCode>FRE</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -191,7 +191,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">0</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>9997</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9997</cbc:ID>
                         <cbc:Name>EXO</cbc:Name>
                         <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -204,7 +204,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">0</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>9996</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9996</cbc:ID>
                         <cbc:Name>GRA</cbc:Name>
                         <cbc:TaxTypeCode>FRE</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -217,7 +217,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">0</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>9995</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9995</cbc:ID>
                         <cbc:Name>EXP</cbc:Name>
                         <cbc:TaxTypeCode>FRE</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -230,7 +230,7 @@
                 <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ doc.mtoOtrosTributos|n_format }}</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cac:TaxScheme>
-                        <cbc:ID>9999</cbc:ID>
+                        <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9999</cbc:ID>
                         <cbc:Name>OTROS</cbc:Name>
                         <cbc:TaxTypeCode>OTH</cbc:TaxTypeCode>
                     </cac:TaxScheme>
@@ -257,18 +257,18 @@
     {% for detail in doc.details %}
         <cac:CreditNoteLine>
             <cbc:ID>{{ loop.index }}</cbc:ID>
-            <cbc:CreditedQuantity unitCode="{{ detail.unidad }}">{{ detail.cantidad }}</cbc:CreditedQuantity>
+            <cbc:CreditedQuantity unitCode="{{ detail.unidad }}" unitCodeListAgencyName="United Nations Economic Commission for Europe" unitCodeListID="UN/ECE rec 20">{{ detail.cantidad }}</cbc:CreditedQuantity>
             <cbc:LineExtensionAmount currencyID="{{ doc.tipoMoneda }}">{{ detail.mtoValorVenta|n_format }}</cbc:LineExtensionAmount>
             <cac:PricingReference>
                 {% if detail.mtoValorGratuito %}
                     <cac:AlternativeConditionPrice>
                         <cbc:PriceAmount currencyID="{{ doc.tipoMoneda }}">{{  detail.mtoValorGratuito|n_format_limit(10) }}</cbc:PriceAmount>
-                        <cbc:PriceTypeCode>02</cbc:PriceTypeCode>
+                        <cbc:PriceTypeCode listAgencyName="PE:SUNAT" listName="Tipo de Precio" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">02</cbc:PriceTypeCode>
                     </cac:AlternativeConditionPrice>
                 {% else %}
                     <cac:AlternativeConditionPrice>
                         <cbc:PriceAmount currencyID="{{ doc.tipoMoneda }}">{{ detail.mtoPrecioUnitario|n_format_limit(10) }}</cbc:PriceAmount>
-                        <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+                        <cbc:PriceTypeCode listAgencyName="PE:SUNAT" listName="Tipo de Precio" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
                     </cac:AlternativeConditionPrice>
                 {% endif %}
             </cac:PricingReference>
@@ -282,7 +282,7 @@
                             <cbc:Percent>{{ detail.porcentajeIsc }}</cbc:Percent>
                             <cbc:TierRange>{{ detail.tipSisIsc }}</cbc:TierRange>
                             <cac:TaxScheme>
-                                <cbc:ID>2000</cbc:ID>
+                                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">2000</cbc:ID>
                                 <cbc:Name>ISC</cbc:Name>
                                 <cbc:TaxTypeCode>EXC</cbc:TaxTypeCode>
                             </cac:TaxScheme>
@@ -294,10 +294,10 @@
                     <cbc:TaxAmount currencyID="{{ doc.tipoMoneda }}">{{ detail.igv|n_format }}</cbc:TaxAmount>
                     <cac:TaxCategory>
                         <cbc:Percent>{{ detail.porcentajeIgv }}</cbc:Percent>
-                        <cbc:TaxExemptionReasonCode>{{ detail.tipAfeIgv }}</cbc:TaxExemptionReasonCode>
+                        <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="Afectacion del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">{{ detail.tipAfeIgv }}</cbc:TaxExemptionReasonCode>
                         {% set afect = getTributoAfect(detail.tipAfeIgv, detail.mtoValorUnitario|n_format_limit(10)) %}
                         <cac:TaxScheme>
-                            <cbc:ID>{{ afect.id }}</cbc:ID>
+                            <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">{{ afect.id }}</cbc:ID>
                             <cbc:Name>{{ afect.name }}</cbc:Name>
                             <cbc:TaxTypeCode>{{ afect.code }}</cbc:TaxTypeCode>
                         </cac:TaxScheme>
@@ -310,7 +310,7 @@
                         <cac:TaxCategory>
                             <cbc:Percent>{{ detail.porcentajeOth }}</cbc:Percent>
                             <cac:TaxScheme>
-                                <cbc:ID>9999</cbc:ID>
+                                <cbc:ID schemeAgencyName="PE:SUNAT" schemeID="UN/ECE 5153" schemeName="Codigo de tributos">9999</cbc:ID>
                                 <cbc:Name>OTROS</cbc:Name>
                                 <cbc:TaxTypeCode>OTH</cbc:TaxTypeCode>
                             </cac:TaxScheme>
@@ -320,6 +320,9 @@
             </cac:TaxTotal>
             <cac:Item>
                 <cbc:Description><![CDATA[{{ detail.descripcion|raw }}]]></cbc:Description>
+                {% if detail.masDetalle %}
+                    <cbc:Description><![CDATA[{{ detail.masDetalle|raw }}]]></cbc:Description>
+                {% endif %}
                 {% if detail.codProducto %}
                     <cac:SellersItemIdentification>
                         <cbc:ID>{{ detail.codProducto }}</cbc:ID>
