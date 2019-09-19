@@ -41,7 +41,7 @@ class TributoFunction
 
   public static function getByAfectacion($afectacion, $mtoValorUnitario)
   {
-    $afectacion = (int)$mtoValorUnitario == 0 && $afectacion == '40' ? '9996':$afectacion;
+    $afectacion = (int)$mtoValorUnitario == 0 && ($afectacion == '40' || $afectacion == '17') ? '9996':$afectacion;
     $code = self::getCode($afectacion);
 
     return self::getByTributo($code);
