@@ -1,8 +1,9 @@
 {
-    "name": "greenter/xml",
+    "name": "greenterycam/xml",
     "description": "XML generación de documentos electrónicos, Facturacion Electrónica SUNAT - Perú",
     "keywords": ["greenter", "xml", "facturacion electronica"],
     "license": "MIT",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "Giancarlos Salas",
@@ -27,7 +28,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "Greenter\\": "src/"
+            "greenterYcam\\": "src/"
         }
     },
     "autoload-dev": {
