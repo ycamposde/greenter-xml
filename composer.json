@@ -7,9 +7,13 @@
         {
             "name": "Giancarlos Salas",
             "email": "giansalex@gmail.com"
+        },
+        {
+            "name": "Yerson Campos",
+            "email": "ycamposde@gmail.com"
         }
     ],
-    "homepage": "https://github.com/giansalex/greenter-xml",
+    "homepage": "https://github.com/ycamposde/greenter-xml",
     "type": "library",
     "require": {
 		"php": ">=5.5.9",
