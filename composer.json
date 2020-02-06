@@ -21,7 +21,7 @@
         "twig/twig": "~1.0 || ~2.0 || ~3.0"
     },
 	  "require-dev": {
-        "greenterycamp/data": "dev-master",
+        "greenter/data": "dev-master",
         "greenter/ubl-validator": "^2.0",
         "phpunit/phpunit": ">=4.8 < 6.0"
     },
