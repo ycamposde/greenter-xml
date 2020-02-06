@@ -10,25 +10,25 @@
             "email": "giansalex@gmail.com"
         },
         {
-            "name": "Yerson Campos",
+            "name": "Yerson Y. Campos De la cruz",
             "email": "ycamposde@gmail.com"
         }
     ],
     "homepage": "https://github.com/ycamposde/greenter-xml",
     "type": "library",
     "require": {
-		"php": ">=5.5.9",
-        "greenter/core": "^2.1",
+		    "php": ">=5.5.9",
+        "greenterycam/core": "dev-master",
         "twig/twig": "~1.0 || ~2.0 || ~3.0"
     },
-	"require-dev": {
-        "greenter/data": "dev-master",
+	  "require-dev": {
+        "greenterycamp/data": "dev-master",
         "greenter/ubl-validator": "^2.0",
         "phpunit/phpunit": ">=4.8 < 6.0"
     },
-	"autoload": {
+	  "autoload": {
         "psr-4": {
-            "greenterYcam\\": "src/"
+            "greenter\\": "src/"
         }
     },
     "autoload-dev": {
