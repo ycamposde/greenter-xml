@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -70,7 +70,7 @@
     {% endif %}
     <cac:Signature>
         <cbc:ID>{{ emp.ruc }}</cbc:ID>
-        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica Contasiscorp]]></cbc:Note>
+        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica web Contasiscorp]]></cbc:Note>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
                 <cbc:ID>20601131952</cbc:ID>
@@ -552,4 +552,4 @@
         </cac:InvoiceLine>
     {% endfor %}
 </Invoice>
-{% endspaceless %}
+{% endapply %}

@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <DebitNote xmlns="urn:oasis:names:specification:ubl:schema:xsd:DebitNote-2"
            xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -54,7 +54,7 @@
     {% set emp = doc.company %}
     <cac:Signature>
         <cbc:ID>{{ emp.ruc }}</cbc:ID>
-        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica Finacontcorp]]></cbc:Note>
+        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica web Contasiscorp]]></cbc:Note>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
                 <cbc:ID>20601131952</cbc:ID>
@@ -408,4 +408,4 @@
         </cac:DebitNoteLine>
     {% endfor %}
 </DebitNote>
-{% endspaceless %}
+{% endapply %}

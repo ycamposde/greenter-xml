@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <CreditNote xmlns="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2"
             xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -275,4 +275,4 @@
     </cac:CreditNoteLine>
     {% endfor %}
 </CreditNote>
-{% endspaceless %}
+{% endapply %}

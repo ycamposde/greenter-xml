@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <DespatchAdvice xmlns="urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2"
 				xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
@@ -136,4 +136,4 @@
 	</cac:DespatchLine>
     {% endfor %}
 </DespatchAdvice>
-{% endspaceless %}
+{% endapply %}

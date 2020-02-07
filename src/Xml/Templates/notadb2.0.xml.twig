@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <DebitNote xmlns="urn:oasis:names:specification:ubl:schema:xsd:DebitNote-2"
            xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
@@ -267,4 +267,4 @@
     </cac:DebitNoteLine>
    {% endfor %}
 </DebitNote>
-{% endspaceless %}
+{% endapply %}

@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
 <?xml version="1.0" encoding="utf-8"?>
 <SummaryDocuments
         xmlns="urn:sunat:names:specification:ubl:peru:schema:xsd:SummaryDocuments-1"
@@ -21,7 +21,7 @@
     {% set emp = doc.company %}
     <cac:Signature>
         <cbc:ID>{{ emp.ruc }}</cbc:ID>
-        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica Finacontcorp]]></cbc:Note>
+        <cbc:Note><![CDATA[Elaborado por el sistema de facturación electrónica web Contasiscorp]]></cbc:Note>
         <cac:SignatoryParty>
             <cac:PartyIdentification>
                 <cbc:ID>20601131952</cbc:ID>
@@ -194,4 +194,4 @@
     </sac:SummaryDocumentsLine>
     {% endfor %}
 </SummaryDocuments>
-{% endspaceless %}
+{% endapply %}
