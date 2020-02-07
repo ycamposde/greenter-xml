@@ -17,11 +17,11 @@
     "type": "library",
     "require": {
 		    "php": ">=5.5.9",
-        "greenterycam/core": "^2.2.3",
+        "greenterycam/core": "^7.0.1",
         "twig/twig": "~1.0 || ~2.0 || ~3.0"
     },
 	  "require-dev": {
-        "greenter/data": "dev-master",
+        "greenterycam/data": "^7.0.1",
         "greenter/ubl-validator": "^2.0",
         "phpunit/phpunit": ">=4.8 < 6.0"
     },
